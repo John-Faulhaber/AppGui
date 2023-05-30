@@ -381,7 +381,7 @@ class ApplicationUi(QtWidgets.QDialog):
         String object containing appropriate version number
         '''
         # If standalone GUI run via direct command
-        if not Path('RemoteControl.exe').is_file():
+        if not Path('appgui.exe').is_file():
             return '00000001'
 
         # Grab encrypted version number from version.dat (try to)
@@ -390,10 +390,10 @@ class ApplicationUi(QtWidgets.QDialog):
                 version_encrypted = myfile.read()
 
             # Decryption. See make_version.py in scripts\helpers for fuller explanation comments
-            exe_remote_control = 'RemoteControl.exe'
+            exe_appgui = 'appgui.exe'
 
             # Generate 32-bit byte-type from CONTENTS of .exe file
-            key = hashlib.blake2s(open(exe_remote_control, 'rb').read(), digest_size=32).digest()
+            key = hashlib.blake2s(open(exe_appgui, 'rb').read(), digest_size=32).digest()
 
             # Encodes to base64
             key_64 = base64.urlsafe_b64encode(key)
